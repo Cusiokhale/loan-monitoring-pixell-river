@@ -12,6 +12,7 @@
         "strictNullChecks": true,
         "strictPropertyInitialization": true,
         "noImplicitThis": true,
+        "noUnusedParameters": true,
         "noUnusedLocals": true,
         "alwaysStrict": true,
         "baseUrl": "./",
@@ -19,6 +20,6 @@
             "*": ["*"]
         }
     },
-    "include": ["src/**/*", "test/**/*", "config/**/*"],
+    "include": ["src/**/*", "test/**/*", "src/config/**/*", "test", "src/config"],
     "exclude": ["node_modules", "dist"]
 }

@@ -1,3 +1,5 @@
+import { NextFunction } from "express";
+
 export interface ApiResponse<T> {
     status: string;
     data?: T;
@@ -31,3 +33,17 @@ export const errorResponse = (message: string, code: string) => ({
     },
     timestamp: new Date().toISOString(),
 });
+
+export type MiddlewareFunction = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => void | Promise<void>;
+
+// Error handling middleware type
+export type ErrorMiddlewareFunction = (
+  err: Error,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => void | Promise<void>;

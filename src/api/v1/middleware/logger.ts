@@ -25,7 +25,7 @@ const accessLogger = morgan("combined", { stream: accessLogStream });
 // Setup the logger for error logs (4xx and 5xx status codes only)
 const errorLogger = morgan("combined", {
     stream: errorLogStream,
-    skip: (req, res) => res.statusCode < 400,
+    skip: (_req, res) => res.statusCode < 400,
 });
 
 // Console logger for development

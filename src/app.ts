@@ -3,15 +3,20 @@ import express, { Express } from "express";
 import morgan from "morgan";
 
 import loansRoutes from "./api/v1/routes/loans";
+import adminRoutes from "./api/v1/routes/admin";
 import errorHandler from "./api/v1/middleware/errorHandler";
-import { accessLogger, consoleLogger, errorLogger } from "./api/v1/middleware/logger";
+import {
+  accessLogger,
+  consoleLogger,
+  errorLogger,
+} from "./api/v1/middleware/logger";
 
 const app: Express = express();
 
 const PORT: number = parseInt(process.env.PORT || "3000");
 
 if (process.env.NODE_ENV !== "production") {
-    app.use(consoleLogger);
+  app.use(consoleLogger);
 }
 
 app.use(accessLogger);
@@ -29,6 +34,8 @@ app.get("/health", (_req, res) => {
 });
 
 app.use("/api/v1/loans", loansRoutes);
+
+app.use("/api/v1/admin", adminRoutes);
 
 app.use(errorLogger);
 

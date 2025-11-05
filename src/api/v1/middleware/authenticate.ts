@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from "express";
 import { DecodedIdToken } from "firebase-admin/auth";
 import { AuthenticationError } from "../errors/errors";
 import { getErrorMessage, getErrorCode } from "../utils/errorUtils";
-import { auth } from "src/config/firebaseConfig";
+import { auth } from "../../../config/firebaseConfig";
 
 // Internal module imports
 

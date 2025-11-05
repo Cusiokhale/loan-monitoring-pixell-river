@@ -5,7 +5,7 @@ const loans: Loan[] = [];
 let loanCounter = 1;
 
 export const createLoan = async (req: Request, res: Response) => {
-  const { amount, purpose, userId } = req.body;
+  const { amount, purpose } = req.body;
 
   if (!amount || !purpose) {
     return res.status(400).json({ error: "Amount and purpose are required" });
@@ -17,7 +17,7 @@ export const createLoan = async (req: Request, res: Response) => {
 
   const loan: Loan = {
     id: `loan_${loanCounter++}`,
-    userId: userId,
+    userId: res.locals.userId,
     amount,
     purpose,
     status: "pending",
@@ -34,7 +34,7 @@ export const createLoan = async (req: Request, res: Response) => {
 
 export const reviewLoan = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { notes, userId } = req.body;
+  const { notes } = req.body;
 
   const loan = loans.find((l) => l.id === id);
 
@@ -49,7 +49,7 @@ export const reviewLoan = async (req: Request, res: Response) => {
   }
 
   loan.status = "under_review";
-  loan.reviewedBy = userId;
+  loan.reviewedBy = res.locals.userId;
 
   res.json({
     message: "Loan marked as under review",
@@ -79,7 +79,7 @@ export const getLoans = async (req: Request, res: Response) => {
 
 export const approveLoan = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { approved, approvedBy } = req.body;
+  const { approved } = req.body;
 
   const loan = loans.find((l) => l.id === id);
 
@@ -94,7 +94,7 @@ export const approveLoan = async (req: Request, res: Response) => {
   }
 
   loan.status = approved ? "approved" : "rejected";
-  loan.approvedBy = approvedBy;
+  loan.approvedBy = res.locals.userId;
 
   res.json({
     message: `Loan ${approved ? "approved" : "rejected"} successfully`,

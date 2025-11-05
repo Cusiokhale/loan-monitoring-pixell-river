@@ -1,5 +1,5 @@
 import request from 'supertest';
-import { app } from 'src/app';
+import { app } from '../src/app';
 
 describe('Loan API Controller Tests', () => {
   describe('POST /api/v1/loans - createLoan', () => {

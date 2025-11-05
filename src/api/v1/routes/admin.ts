@@ -6,7 +6,6 @@ import {
   listUsers,
 } from "../controllers/admin";
 import authenticate from "../middleware/authenticate";
-import isAuthorized from "../middleware/authorize";
 
 const router = Router();
 
@@ -14,7 +13,6 @@ const router = Router();
 router.get(
   "/:userId",
   authenticate,
-  isAuthorized({ hasRole: ["admin"] }),
   getUserById
 );
 
@@ -22,14 +20,12 @@ router.get(
 router.post(
   "/users/:userId/claims",
   authenticate,
-  isAuthorized({ hasRole: ["admin"] }),
   setUserClaims
 );
 
 router.get(
   "/users",
   authenticate,
-  isAuthorized({ hasRole: ["admin"] }),
   listUsers
 );
 

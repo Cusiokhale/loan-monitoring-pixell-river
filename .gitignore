@@ -3,4 +3,10 @@ dist/
 logs/
 *.log
 
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Firebase service account key
 service-account-key.json
